@@ -30,7 +30,17 @@ public class Journal
 
     public void SaveToFile(string file)
     {
-
+        Console.WriteLine("What is the file name?");
+        string fileName = Console.ReadLine();
+        using (StreamWriter dropIn = new StreamWriter(fileName, append: true))
+        {
+            foreach (var entry in _entries)
+            {
+                dropIn.WriteLine($"Date: {entry._date} - Prompt: {entry._promptText}");
+                dropIn.WriteLine(entry._entryText);
+                dropIn.WriteLine();
+            }
+        }
     }
     public void LoadFromFile(string file)
     {

@@ -1,3 +1,5 @@
+//To exceed requirements, I have added another option to search entries by date which can be observed in the Program file
+
 using System;
 
 class Program

@@ -15,11 +15,12 @@ class Program
             Console.WriteLine("2. Display");
             Console.WriteLine("3. Load");
             Console.WriteLine("4. Save");
-            Console.WriteLine("5. Quit");
+            Console.WriteLine("5. Search by Date");
+            Console.WriteLine("6. Quit");
             Console.WriteLine("What would you like to do?");
             string selection = Console.ReadLine();
 
-            if (selection == "1") // Write
+            if (selection == "1")
             {
                 string randomPrompt = generator.GetRandomPrompt();
                 Console.WriteLine(randomPrompt);
@@ -41,7 +42,7 @@ class Program
                 journal.LoadFromFile(fileName);
                 Console.WriteLine("Journal loaded.\n");
             }
-            else if (selection == "4")
+            else if (selection == "4") 
             {
                 Console.WriteLine("What is the file name to save to?");
                 string fileName = Console.ReadLine();
@@ -49,6 +50,27 @@ class Program
                 Console.WriteLine("Journal saved.\n");
             }
             else if (selection == "5")
+            {
+                Console.WriteLine("Enter the date to search for (MM/dd/yyyy):");
+                string searchDate = Console.ReadLine();
+                Console.WriteLine($"Searching for entries on {searchDate}:");
+                bool found = false;
+
+                foreach (var entry in journal._entries)
+                {
+                    if (entry._date == searchDate)
+                    {
+                        entry.Display();
+                        found = true;
+                    }
+                }
+
+                if (!found)
+                {
+                    Console.WriteLine("No entries found for that date.\n");
+                }
+            }
+            else if (selection == "6")
             {
                 running = false;
                 Console.WriteLine("Goodbye!");

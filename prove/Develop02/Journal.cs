@@ -43,7 +43,33 @@ public class Journal
         }
     }
     public void LoadFromFile(string file)
+{
+    Console.WriteLine("What is the file name?");
+    string fileName = Console.ReadLine();
+
+    if (File.Exists(fileName))
     {
-        
+        _entries.Clear();
+
+        string[] lines = File.ReadAllLines(fileName);
+        for (int i = 0; i < lines.Length; i += 3)
+        {
+            if (i + 2 < lines.Length)
+            {
+                
+                string dateLine = lines[i].Replace("Date: ", "").Split(" - Prompt: ")[0];
+                string promptLine = lines[i].Split(" - Prompt: ")[1];
+                string entryText = lines[i + 1];
+
+                
+                Entry entry = new Entry(promptLine, entryText) { _date = dateLine };
+                _entries.Add(entry);
+            }
+        }
     }
+    else
+    {
+        Console.WriteLine("File not found.");
+    }
+}
 }

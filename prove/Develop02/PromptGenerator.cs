@@ -9,7 +9,7 @@ public class PromptGenerator
     {
         _prompts = new List<string>
         {
-            "What is something taht made you smile today?",
+            "What is something that made you smile today?",
             "What was the most meaningful experience that you had today?",
             "What was your most meaningful connection with someone today?",
             "What is the most important thing that you did today?",
@@ -17,7 +17,6 @@ public class PromptGenerator
         };
     }
 
-    
 
 
     public string GetRandomPrompt()

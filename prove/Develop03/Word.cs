@@ -11,11 +11,20 @@ public class Word
 
     public void Hide()
     {
-        _isHidden = true;
+        if (!_isHidden)
+        {
+            _isHidden = true;
+        }
+    }
+
+    public bool IsHidden
+    {
+        get {return _isHidden;}
     }
 
     public override string ToString()
     {
         return _isHidden ? new string('_', _text.Length) : _text;
     }
+
 }

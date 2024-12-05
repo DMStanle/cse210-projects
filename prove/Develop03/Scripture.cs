@@ -20,10 +20,16 @@ public class Scripture
 
     public void HideRandomWords(int numberToHide)
     {
+        numberToHide = Math.Min(numberToHide, _words.Count);
         var hidingWord = new HashSet<int>();
-        while (hidingWord.Count < numberToHide && hidingWord.Count < _words.Count)
+        while (hidingWord.Count < numberToHide)
         {
-            hidingWord.Add(_random.Next(_words.Count));
+            int randomIndex = _random.Next(_words.Count);
+
+            if (!_words[randomIndex].IsHidden)
+            {
+                hidingWord.Add(randomIndex);
+            }
         }
         foreach (var i in hidingWord)
         {
@@ -35,5 +41,16 @@ public class Scripture
     {
         return string.Join(" ", _words);
     }
+
+    public bool AllWordsAreGone()
+    {
+        return _words.All(word => word.IsHidden);
+    }
+
+    public int CountWords()
+    {
+        return _words.Count(word => !word.IsHidden);
+    }
+
 
 }

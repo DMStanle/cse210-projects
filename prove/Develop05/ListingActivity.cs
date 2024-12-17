@@ -35,18 +35,23 @@ public class ListingActivity : Activity
 
     while (Environment.TickCount < endTime)
     {
-        Console.WriteLine($"{chosenQuestion} (You have {(_duration - (Environment.TickCount - (endTime - _duration * 1000)) / 1000)} seconds left)");
+        int remainingTime = (endTime - Environment.TickCount) / 1000;
         
+        Console.Clear();
+        Console.WriteLine($"{chosenQuestion} (You have {remainingTime} seconds left)");
+
         string entry = Console.ReadLine();
         if (!string.IsNullOrWhiteSpace(entry))
         {
             userSubmissions.Add(entry);
         }
     }
+
     Console.WriteLine();
     Console.WriteLine($"You listed {userSubmissions.Count} items!");
     DisplayEndingMessage();
 }
+
 
 
 

@@ -44,7 +44,7 @@ while (selection != "4")
     else if (selection == "4")
     {
         Console.Clear();
-        Console.WriteLine("Goodbye!");
+        Console.WriteLine("Program Ended.");
     }
 }
 

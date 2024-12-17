@@ -39,4 +39,41 @@ public class ReflectingActivity : Activity
         Random randomSelected = new Random();
         return _questions[randomSelected.Next(_questions.Count)];
     }
+
+    private void DisplayRandomPrompt()
+    {
+        Console.WriteLine();
+        Console.WriteLine(GetRandomPrompt());
+        Console.WriteLine("When you have something in mind, press Enter to continue.");
+        Console.ReadLine();
+
+    }
+
+private void DisplayQuestions()
+{
+    int endTime = Environment.TickCount + _duration * 1000;
+
+    while (Environment.TickCount < endTime)
+    {
+        Console.WriteLine($"> {GetRandomQuestion()}");
+        ShowSpinner(10);
+        Console.WriteLine();
+        if (Environment.TickCount >= endTime)
+        {
+            break;
+        }
+    }
+}
+
+
+
+
+public void Run()
+{
+    DisplayStartingMessage();
+    DisplayRandomPrompt();
+    DisplayQuestions();
+    DisplayEndingMessage();
+}
+
 }

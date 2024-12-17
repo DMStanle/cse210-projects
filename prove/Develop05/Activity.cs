@@ -21,7 +21,6 @@ public class Activity
         Console.Write("How long would you like this session to last (in seconds)? ");
         _duration = int.Parse(Console.ReadLine());
         Console.WriteLine("Get Ready...");
-        Thread.Sleep(3000);
 
     }
 
@@ -29,7 +28,7 @@ public class Activity
     {
         Console.WriteLine("Well done!");
         Console.WriteLine($"You spent {_duration} seconds focusing on the {_name} activity.");
-        ShowCountDown(3);
+        ShowSpinner(3);
     }
 
     public void ShowSpinner(int seconds)
@@ -51,12 +50,18 @@ public class Activity
 
     protected void ShowCountDown(int seconds)
     {
+
+        int left = Console.CursorLeft;
+        int top = Console.CursorTop;
         for (int second = seconds; second > 0; second--)
         {
-            Console.WriteLine(second);
+            Console.SetCursorPosition(left, top);
+            Console.Write(second);
             Thread.Sleep(1000);
         }
-        Console.Clear();
+
+        Console.SetCursorPosition(left, top);
+        Console.Write(" ");
 
 
     }

@@ -1,6 +1,6 @@
 public class BreathingActivity : Activity
 {
-    public BreathingActivity(int duration) : base("Breathing Activity", "This activity will help you relax by walking you through breathing in and out slowly.Clear your mind and focus on your breathing", duration)
+    public BreathingActivity(string name, string description, int duration) : base("Breathing Activity", "This activity will help you relax by walking you through breathing in and out slowly.Clear your mind and focus on your breathing", duration)
     {
 
     }
@@ -10,15 +10,17 @@ public class BreathingActivity : Activity
         DisplayStartingMessage();
 
         int end = Environment.TickCount + _duration * 1000;
+        ShowSpinner(3);
         while (Environment.TickCount < end)
         {
+    
             Console.Clear();
             Console.WriteLine();
             Console.WriteLine("Breathe in...");
             ShowCountDown(5);
             Console.WriteLine();
             Console.WriteLine("Now breathe out...");
-            ShowCountDown(10);
+            ShowCountDown(8);
 
         }
         DisplayEndingMessage();

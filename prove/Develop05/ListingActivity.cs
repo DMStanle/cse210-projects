@@ -1,9 +1,8 @@
 public class ListingActivity : Activity
 {
-    private int _count;
     private List<string> _prompts;
 
-    public ListingActivity(int duration) 
+    public ListingActivity(string name, string description, int duration) 
         : base("Listing Activity", 
                "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.", 
                duration)
@@ -19,37 +18,36 @@ public class ListingActivity : Activity
     }
 
     public void Run()
+{
+    DisplayStartingMessage();
+
+    Random randomSelected = new Random();
+    string chosenQuestion = _prompts[randomSelected.Next(_prompts.Count)];
+
+    Console.WriteLine("List as many responses as possible to the following prompt: ");
+    Console.WriteLine(chosenQuestion);
+    Console.WriteLine("You may begin in: ");
+    ShowCountDown(5);
+
+    List<string> userSubmissions = new List<string>();
+
+    int endTime = Environment.TickCount + _duration * 1000;
+
+    while (Environment.TickCount < endTime)
     {
-        DisplayStartingMessage();
-
-        Random randomSelected = new Random();
-        string chosenQuestion = _prompts[randomSelected.Next(_prompts.Count)];
-
-        Console.WriteLine("List as many responses as possible to the following prompt: ");
-        Console.WriteLine(chosenQuestion);
-        Console.WriteLine("You may begin in: ");
-        ShowCountDown(5);
-
-        List<string> userSubmissions = new List<string>();
-        int end = Environment.TickCount + _duration * 1000;
-
-        _count = 0;
-
-        while (Environment.TickCount < end)
+        Console.WriteLine($"{chosenQuestion} (You have {(_duration - (Environment.TickCount - (endTime - _duration * 1000)) / 1000)} seconds left)");
+        
+        string entry = Console.ReadLine();
+        if (!string.IsNullOrWhiteSpace(entry))
         {
-            Console.Clear();
-            Console.WriteLine();
-            string entry = Console.ReadLine();
-
-            if (!string.IsNullOrWhiteSpace(entry))
-            {
-                userSubmissions.Add(entry);
-                _count++;
-            }
+            userSubmissions.Add(entry);
         }
-
-        Console.WriteLine();
-        Console.WriteLine($"You listed {_count} items!");
-        DisplayEndingMessage();
     }
+    Console.WriteLine();
+    Console.WriteLine($"You listed {userSubmissions.Count} items!");
+    DisplayEndingMessage();
+}
+
+
+
 }
